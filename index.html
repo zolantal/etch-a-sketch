@@ -17,10 +17,14 @@
     <button id="erase" class="mode">Erase</button>
   </div>
   <div id="settings">
-    <input type="range" min="2" max="50" value="" id="no-squares-range">
-    <p id="no-squares-text"></p>
-    <button id="gridlines" class="toggle" class="selected-button">Toggle gridlines</button>
-    <button id="clear">Clear</button>
+    <div id="settings-no-squares">
+      <input type="range" min="2" max="50" value="" id="no-squares-range">
+      <p id="no-squares-text"></p>
+    </div>
+    <div id="settings-buttons">
+      <button id="gridlines" class="setting-button" class="selected-button">Toggle gridlines</button>
+      <button id="clear" class="setting-button">Clear</button>
+    </div>
   </div>
   <div id="grid"></div>
 </body>

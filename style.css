@@ -2,28 +2,67 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1 {
+  font-size: 28pt;
   text-align: center;
+  margin: 20px;
 }
 
 #modes {
   display: flex;
   justify-content: space-between;
-  gap: 50px;
-  margin: 10px;
+  gap: 30px;
+  margin: 15px;
+}
+
+.mode {
+  font-size: 14pt;
+  width: 90px;
+  height: 40px;
+  border-radius: 6px;
 }
 
 #settings {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 50px;
-  margin: 20px;
+  margin: 10px;
+}
+
+#settings-no-squares {
+  display: flex;
+  gap: 10px;
+}
+
+#no-squares-text {
+  font-size: 14pt;
+}
+
+#settings-buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.setting-button {
+  font-size: 12pt;
+  height: 40px;
+  border-radius: 6px;
+}
+
+#gridlines {
+  width: 140px;
+}
+
+#clear {
+  width: 70px;
 }
 
 #grid {
-  margin: 20px auto;
+  margin: 10px;
   padding: 0;
   border: 3px;
   border-style: solid;

@@ -1,5 +1,7 @@
 const grid = document.querySelector("#grid");
-const gridSize = 640;
+const gridSize = 560;
+const settings = document.querySelector("#settings");
+settings.style.width = gridSize + "px";
 
 let noSquaresDefault = 16;
 let noSquares = noSquaresDefault;
@@ -47,20 +49,24 @@ function fillSquare(square) {
 }
 
 function shadeSquare(square) {
-  if (square.style.backgroundColor === "rgb(0, 0, 0)" || square.style.backgroundColor === "black") {
+  if (square.style.backgroundColor === "rgb(0, 0, 0)" ||
+      square.style.backgroundColor === "black") {
     return;
   } else if (!square.style.backgroundColor.includes("rgb")) {
-    square.style.backgroundColor = `rgb(${256 - shadeStep}, ${256 - shadeStep}, ${256 - shadeStep})`;
+    square.style.backgroundColor =
+      `rgb(${256 - shadeStep}, ${256 - shadeStep}, ${256 - shadeStep})`;
   } else {
     rgbColour = square.style.backgroundColor;
-    rgbArr = rgbColour.substring(4, rgbColour.length-1).replace(/ /g, '').split(',');
+    rgbArr =
+      rgbColour.substring(4, rgbColour.length-1).replace(/ /g, '').split(',');
     
     r = Number(rgbArr[0]);
     g = Number(rgbArr[1]);
     b = Number(rgbArr[2]);
 
     if(r !== g || r !== b || g !== b) {
-      square.style.backgroundColor = `rgb(${256 - shadeStep}, ${256 - shadeStep}, ${256 - shadeStep})`;
+      square.style.backgroundColor =
+        `rgb(${256 - shadeStep}, ${256 - shadeStep}, ${256 - shadeStep})`;
       return;
     }
 
@@ -131,7 +137,7 @@ function redrawGrid(noSquares) {
     turnOffGridlines();
   }
 
-  turnOnFill();
+  turnOnMode(fillSquare);
 }
 
 function clearGrid(e) {
@@ -152,7 +158,8 @@ function toggleGridlines(e) {
 
 function turnOnGridlines() {
   squares.forEach(square => {
-    squareSize = Math.round(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
+    squareSize =
+      Math.round(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
     square.style.border = squareBorderSize + "px";
     square.style.borderStyle = "solid";
     square.style.borderColor = gridLineColour;
@@ -179,60 +186,15 @@ function turnOffAllModes() {
   }
 }
 
-function turnOnFill() {
+function turnOnMode(squareFunction) {
   squares.forEach(square => {
     square.addEventListener("mouseenter", (e) => {
       if (mouseDown) {
-        fillSquare(e.target);
+        squareFunction(e.target);
       }
     });
     square.addEventListener("mousedown", (e) => {
-      fillSquare(e.target);
-    });
-  }, {
-    once: true
-  });
-}
-
-function turnOnErase() {
-  squares.forEach(square => {
-    square.addEventListener("mouseenter", (e) => {
-      if (mouseDown) {
-        eraseSquare(e.target);
-      }
-    });
-    square.addEventListener("mousedown", (e) => {
-      eraseSquare(e.target);
-    });
-  }, {
-    once: true
-  });
-}
-
-function turnOnShade() {
-  squares.forEach(square => {
-    square.addEventListener("mouseenter", (e) => {
-      if (mouseDown) {
-        shadeSquare(e.target);
-      }
-    });
-    square.addEventListener("mousedown", (e) => {
-      shadeSquare(e.target);
-    });
-  }, {
-    once: true
-  });
-}
-
-function turnOnRGB() {
-  squares.forEach(square => {
-    square.addEventListener("mouseenter", (e) => {
-      if (mouseDown) {
-        rgbSquare(e.target);
-      }
-    });
-    square.addEventListener("mousedown", (e) => {
-      rgbSquare(e.target);
+      squareFunction(e.target);
     });
   }, {
     once: true
@@ -251,12 +213,12 @@ function toggleMode(e) {
   e.target.classList.add("selected-button");
 
   if (currentMode === "fill") {
-    turnOnFill();
+    turnOnMode(fillSquare);
   } else if (currentMode === "shade") {
-    turnOnShade();
+    turnOnMode(shadeSquare);
   } else if (currentMode === "rgb") {
-    turnOnRGB();
+    turnOnMode(rgbSquare);
   } else if (currentMode === "erase") {
-    turnOnErase();
+    turnOnMode(eraseSquare);
   }
 }
