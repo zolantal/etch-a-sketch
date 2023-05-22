@@ -17,8 +17,10 @@ h1 {
 
 #grid {
   margin: 0 auto;
-  border: 0;
   padding: 0;
+  border: 3px;
+  border-style: solid;
+  border-color: black;
   display: flex;
   flex-direction: column;
 }

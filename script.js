@@ -8,7 +8,13 @@ const noSquaresText = document.querySelector("#no-squares-text");
 noSquaresRange.value = noSquaresDefault;
 noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
+const fillModeButton = document.querySelector("#fill-mode");
+const gradientModeButton = document.querySelector("#gradient-mode");
+const rgbModeButton = document.querySelector("#rgb-mode");
 const clearButton = document.querySelector("#clear");
+
+fillModeButton.style.backgroundColor = "grey";
+fillModeButton.style.color = "white";
 
 let squares;
 const squareBorderSize = 1;
@@ -21,8 +27,18 @@ noSquaresRange.addEventListener("input", noSquaresRangeChange);
 
 clearButton.addEventListener("click", clearGrid);
 
+let mouseDown = false;
+const body = document.querySelector("body");
+body.addEventListener("mousedown", () => mouseDown = true);
+body.addEventListener("mouseup", () => mouseDown = false);
+body.addEventListener("dragstart", (e) => e.preventDefault());
+
 function colorSquare(e) {
-  e.target.style.backgroundColor = squareEndColour;
+  if(mouseDown) {
+    e.target.style.backgroundColor = squareEndColour;
+  }
+
+  // e.target.style.backgroundColor = squareEndColour;
 }
 
 function clearSquare(square) {
