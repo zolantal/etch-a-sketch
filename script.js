@@ -1,11 +1,12 @@
 const grid = document.querySelector("#grid");
 const gridSize = 640;
-grid.style.width = gridSize + "px";
-grid.style.height = gridSize + "px";
+// grid.style.width = gridSize + "px";
+// grid.style.height = gridSize + "px";
 
 const squares = [];
 let size = 16;
-const squareSize = Math.floor((gridSize / size));
+const squareBorderSize = 1;
+const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * size) / size));
 const squareStartColour = "lightgrey";
 
 for (let i = 0; i < size; i++) {
@@ -25,8 +26,7 @@ for (let i = 0; i < size; i++) {
     square.style.backgroundColor = squareStartColour;
     square.style.margin = 0;
     square.style.padding = 0;
-    square.style.border = 0;
-    square.style.border = "1px";
+    square.style.border = squareBorderSize + "px";
     square.style.borderStyle = "solid";
     square.style.borderColor = "transparent";
     square.style.backgroundClip = "padding-box";
@@ -37,5 +37,4 @@ for (let i = 0; i < size; i++) {
 
   grid.appendChild(row);
 }
-
 
