@@ -11,14 +11,21 @@ const noSquaresText = document.querySelector("#no-squares-text");
 noSquaresRange.value = noSquaresDefault;
 noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
-const fillButton = document.querySelector("#fill");
-const shadingButton = document.querySelector("#shading");
-const rgbButton = document.querySelector("#rgb");
-const eraserButton = document.querySelector("#eraser");
+// const fillButton = document.querySelector("#fill");
+// const shadingButton = document.querySelector("#shading");
+// const rgbButton = document.querySelector("#rgb");
+// const eraserButton = document.querySelector("#eraser");
+
+const modeButtons = document.querySelectorAll(".mode");
+modeButtons.forEach(button => button.addEventListener("click", toggleMode));
 
 const gridlinesButton = document.querySelector("#gridlines")
 const clearButton = document.querySelector("#clear");
-const toggleableButtons = document.querySelectorAll(".toggle");
+
+const defaultMode = "fill";
+const defaultModeButton = document.querySelector("#" + defaultMode);
+defaultModeButton.classList.add("selected-button");
+let currentMode = defaultMode;
 
 let squares;
 let squareSize;
@@ -32,15 +39,7 @@ redrawGrid(noSquaresDefault);
 
 noSquaresRange.addEventListener("input", noSquaresRangeChange);
 
-toggleableButtons.forEach(button => {
-  button.addEventListener("click", (e) => {
-    e.target.classList.toggle("selected-button");
-  });
-});
-eraserButton.addEventListener("click", (e) => toggleEraser());
-shadingButton.addEventListener("click", (e) => toggleShading());
-rgbButton.addEventListener("click", (e) => toggleRGB());
-gridlinesButton.addEventListener("click", (e) => toggleGridlines());
+gridlinesButton.addEventListener("click", toggleGridlines);
 clearButton.addEventListener("click", clearGrid);
 
 let mouseDown = false;
@@ -99,22 +98,16 @@ function redrawGrid(noSquares) {
     turnOffGridlines();
   }
 
-  squares.forEach(square => {
-    square.addEventListener("mouseenter", (e) => {
-      if (mouseDown) {
-        colourSquare(e.target);
-      }
-    });
-  }, {
-    once: true
-  });
+  turnOnFill();
 }
 
 function clearGrid(e) {
   squares.forEach(clearSquare);
 }
 
-function toggleGridlines() {
+function toggleGridlines(e) {
+  e.target.classList.toggle("selected-button");
+
   if (gridlinesOn) {
     gridlinesOn = false;
     turnOffGridlines();
@@ -144,6 +137,46 @@ function turnOffGridlines() {
   })
 }
 
-function toggleEraser() {
-  
+function turnOffAllModes() {
+  // squares.forEach(square => square.replaceWith(square.cloneNode()));
+  for (let i = 0; i < squares.length; i++) {
+    const old_square = squares[i];
+    const new_square = old_square.cloneNode();
+    old_square.replaceWith(new_square);
+    squares[i] = new_square;
+  }
+}
+
+function turnOnFill() {
+  squares.forEach(square => {
+    square.addEventListener("mouseenter", (e) => {
+      if (mouseDown) {
+        colourSquare(e.target);
+      }
+    });
+  }, {
+    once: true
+  });
+}
+
+function toggleMode(e) {
+  if (currentMode === e.target.id) {
+    return;
+  }
+
+  turnOffAllModes();
+  currentMode = e.target.id;
+
+  modeButtons.forEach(button => button.classList.remove("selected-button"));
+  e.target.classList.add("selected-button");
+
+  if (currentMode === "fill") {
+    turnOnFill();
+  } else if (currentMode === "shading") {
+
+  } else if (currentMode === "rgb") {
+
+  } else if (currentMode === "eraser") {
+
+  }
 }
