@@ -10,10 +10,13 @@
 </head>
 <body>
   <h1>Etch-A-Sketch</h1>
+  <div id="modes">
+    <button id="fill" class="toggle">Fill</button>
+    <button id="eraser" class="toggle">Eraser</button>
+    <button id="shading" class="toggle">Shading</button>
+    <button id="rgb" class="toggle">RGB</button>
+  </div>
   <div id="settings">
-    <button id="eraser" class="toggle">Toggle eraser</button>
-    <button id="shading" class="toggle">Toggle shading</button>
-    <button id="rgb" class="toggle">Toggle RGB</button>
     <input type="range" min="2" max="50" value="" id="no-squares-range">
     <p id="no-squares-text"></p>
     <button id="gridlines" class="toggle" class="selected-button">Toggle gridlines</button>

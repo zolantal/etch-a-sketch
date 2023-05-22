@@ -8,6 +8,13 @@ h1 {
   text-align: center;
 }
 
+#modes {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  margin: 10px;
+}
+
 #settings {
   display: flex;
   justify-content: space-between;
@@ -16,7 +23,7 @@ h1 {
 }
 
 #grid {
-  margin: 30px auto;
+  margin: 20px auto;
   padding: 0;
   border: 3px;
   border-style: solid;
