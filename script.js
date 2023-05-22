@@ -3,14 +3,23 @@ const gridSize = 640;
 // grid.style.width = gridSize + "px";
 // grid.style.height = gridSize + "px";
 
+// const settingsRow = document.querySelector("#settings");
+// settingsRow.width = gridSize + "px";
+
+let noSquares = 16;
+
+const noSquaresRange = document.querySelector("#no-squares-range");
+const noSquaresText = document.querySelector("#no-squares-text");
+noSquaresRange.value = noSquares;
+noSquaresText.value = noSquares;
+
 const squares = [];
-let size = 16;
 const squareBorderSize = 1;
-const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * size) / size));
+const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
 const squareStartColour = "lightgrey";
 const squareEndColour = "black";
 
-for (let i = 0; i < size; i++) {
+for (let i = 0; i < noSquares; i++) {
   const row = document.createElement("div");
 
   row.style.margin = 0;
@@ -18,9 +27,9 @@ for (let i = 0; i < size; i++) {
   row.style.border = 0;
   row.style.display = "flex";
 
-  for (let j = 0; j < size; j++) {
+  for (let j = 0; j < noSquares; j++) {
     const square = document.createElement("div");
-    square.setAttribute("id", i * size + j)
+    square.setAttribute("id", i * noSquares + j)
   
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
@@ -48,3 +57,12 @@ squares.forEach(square => {
 function colorSquare(e) {
   e.target.style.backgroundColor = squareEndColour;
 }
+
+// function updateNoSquaresText(val) {
+//   noSquaresText.value = val;
+// }
+
+// function updateNoSquaresRange(val) {
+//   noSquaresRange.value = val;
+// }
+

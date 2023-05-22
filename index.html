@@ -10,6 +10,14 @@
 </head>
 <body>
   <h1>Etch A Sketch</h1>
+  <div id="settings">
+    <p>Mode</p>
+    <button>Reset</button>
+    <input type="range" min="2" max="100" value="" id="no-squares-range">
+    <!-- <input type="range" min="2" max="100" value="" id="no-squares-range" oninput="updateNoSquaresText(this.value)"> -->
+    <output type="text" value="" id="no-squares-text">
+    <!-- <input type="text" min="2" max="100" value="" id="no-squares-text" oninput="updateNoSquaresRange(this.value)"> -->
+  </div>
   <div id="grid"></div>
 </body>
 </html>
