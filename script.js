@@ -1,7 +1,5 @@
 const grid = document.querySelector("#grid");
 const gridSize = 640;
-// grid.style.width = gridSize + "px";
-// grid.style.height = gridSize + "px";
 
 let noSquaresDefault = 16;
 let noSquares = noSquaresDefault;
@@ -27,6 +25,7 @@ let squareSize;
 const squareBorderSize = 1;
 const squareStartColour = "white";
 const squareEndColour = "black";
+const shadeStep = 32;
 const gridLineColour = "lightgrey";
 let gridlinesOn = true;
 
@@ -48,7 +47,35 @@ function fillSquare(square) {
 }
 
 function shadeSquare(square) {
+  if (square.style.backgroundColor === "rgb(0, 0, 0)" || square.style.backgroundColor === "black") {
+    return;
+  } else if (!square.style.backgroundColor.includes("rgb")) {
+    square.style.backgroundColor = `rgb(${256 - shadeStep}, ${256 - shadeStep}, ${256 - shadeStep})`;
+  } else {
+    rgbColour = square.style.backgroundColor;
+    rgbArr = rgbColour.substring(4, rgbColour.length-1).replace(/ /g, '').split(',');
+    
+    r = Number(rgbArr[0]);
+    g = Number(rgbArr[1]);
+    b = Number(rgbArr[2]);
 
+    if(r !== g || r !== b || g !== b) {
+      square.style.backgroundColor = `rgb(${256 - shadeStep}, ${256 - shadeStep}, ${256 - shadeStep})`;
+      return;
+    }
+
+    r -= shadeStep;
+    g -= shadeStep;
+    b -= shadeStep;
+    
+    if (r > 255 || g > 255 || b > 255) {
+      r = 255;
+      g = 255;
+      b = 255;
+    }
+
+    square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+  }
 }
 
 function rgbSquare(square) {
