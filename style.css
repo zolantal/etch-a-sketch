@@ -23,6 +23,7 @@ h1 {
   border-color: black;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .selected-button {

@@ -1,5 +1,7 @@
 const grid = document.querySelector("#grid");
 const gridSize = 640;
+// grid.style.width = gridSize + "px";
+// grid.style.height = gridSize + "px";
 
 let noSquaresDefault = 16;
 let noSquares = noSquaresDefault;
@@ -9,11 +11,12 @@ const noSquaresText = document.querySelector("#no-squares-text");
 noSquaresRange.value = noSquaresDefault;
 noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
-const eraserModeButton = document.querySelector("#eraser");
+const eraserButton = document.querySelector("#eraser");
 const shadingButton = document.querySelector("#shading");
 const rgbButton = document.querySelector("#rgb");
 const gridlinesButton = document.querySelector("#gridlines")
 const clearButton = document.querySelector("#clear");
+const toggleableButtons = document.querySelectorAll(".toggle");
 
 let squares;
 const squareBorderSize = 1;
@@ -26,10 +29,15 @@ redrawGrid(noSquaresDefault);
 
 noSquaresRange.addEventListener("input", noSquaresRangeChange);
 
-gridlinesButton.addEventListener("click", (e) => {
-  e.target.classList.toggle("selected-button");
-  toggleGridlines();
-})
+toggleableButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    e.target.classList.toggle("selected-button");
+  });
+});
+eraserButton.addEventListener("click", (e) => toggleEraser());
+shadingButton.addEventListener("click", (e) => toggleShading());
+rgbButton.addEventListener("click", (e) => toggleRGB());
+gridlinesButton.addEventListener("click", (e) => toggleGridlines());
 clearButton.addEventListener("click", clearGrid);
 
 let mouseDown = false;
@@ -68,6 +76,7 @@ function redrawGrid(noSquares) {
     row.style.padding = 0;
     row.style.border = 0;
     row.style.display = "flex";
+    row.style.justifyContent = "center";
 
     for (let j = 0; j < noSquares; j++) {
       const square = document.createElement("div");
@@ -134,4 +143,8 @@ function turnOffGridlines() {
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
   })
+}
+
+function toggleEraser() {
+  
 }
