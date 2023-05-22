@@ -11,6 +11,7 @@ noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 const eraserModeButton = document.querySelector("#eraser");
 const shadingButton = document.querySelector("#shading");
 const rgbButton = document.querySelector("#rgb");
+const gridlinesButton = document.querySelector("#gridlines")
 const clearButton = document.querySelector("#clear");
 
 let squares;
@@ -21,6 +22,7 @@ const squareEndColour = "black";
 redrawGrid(noSquaresDefault);
 
 noSquaresRange.addEventListener("input", noSquaresRangeChange);
+
 
 clearButton.addEventListener("click", clearGrid);
 
