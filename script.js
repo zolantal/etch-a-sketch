@@ -186,6 +186,9 @@ function turnOnFill() {
         fillSquare(e.target);
       }
     });
+    square.addEventListener("mousedown", (e) => {
+      fillSquare(e.target);
+    });
   }, {
     once: true
   });
@@ -197,6 +200,9 @@ function turnOnErase() {
       if (mouseDown) {
         eraseSquare(e.target);
       }
+    });
+    square.addEventListener("mousedown", (e) => {
+      eraseSquare(e.target);
     });
   }, {
     once: true
@@ -210,6 +216,9 @@ function turnOnShade() {
         shadeSquare(e.target);
       }
     });
+    square.addEventListener("mousedown", (e) => {
+      shadeSquare(e.target);
+    });
   }, {
     once: true
   });
@@ -221,6 +230,9 @@ function turnOnRGB() {
       if (mouseDown) {
         rgbSquare(e.target);
       }
+    });
+    square.addEventListener("mousedown", (e) => {
+      rgbSquare(e.target);
     });
   }, {
     once: true
