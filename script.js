@@ -8,6 +8,7 @@ let size = 16;
 const squareBorderSize = 1;
 const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * size) / size));
 const squareStartColour = "lightgrey";
+const squareEndColour = "black";
 
 for (let i = 0; i < size; i++) {
   const row = document.createElement("div");
@@ -38,3 +39,12 @@ for (let i = 0; i < size; i++) {
   grid.appendChild(row);
 }
 
+squares.forEach(square => {
+  square.addEventListener("mouseenter", colorSquare);
+}, {
+  once: true
+});
+
+function colorSquare(e) {
+  e.target.style.backgroundColor = squareEndColour;
+}
