@@ -11,9 +11,11 @@ const noSquaresText = document.querySelector("#no-squares-text");
 noSquaresRange.value = noSquaresDefault;
 noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
-const eraserButton = document.querySelector("#eraser");
+const fillButton = document.querySelector("#fill");
 const shadingButton = document.querySelector("#shading");
 const rgbButton = document.querySelector("#rgb");
+const eraserButton = document.querySelector("#eraser");
+
 const gridlinesButton = document.querySelector("#gridlines")
 const clearButton = document.querySelector("#clear");
 const toggleableButtons = document.querySelectorAll(".toggle");
