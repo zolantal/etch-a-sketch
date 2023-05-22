@@ -8,17 +8,14 @@ const noSquaresText = document.querySelector("#no-squares-text");
 noSquaresRange.value = noSquaresDefault;
 noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
-const fillModeButton = document.querySelector("#fill-mode");
-const gradientModeButton = document.querySelector("#gradient-mode");
-const rgbModeButton = document.querySelector("#rgb-mode");
+const eraserModeButton = document.querySelector("#eraser");
+const shadingButton = document.querySelector("#shading");
+const rgbButton = document.querySelector("#rgb");
 const clearButton = document.querySelector("#clear");
-
-fillModeButton.style.backgroundColor = "grey";
-fillModeButton.style.color = "white";
 
 let squares;
 const squareBorderSize = 1;
-const squareStartColour = "lightgrey";
+const squareStartColour = "white";
 const squareEndColour = "black";
 
 redrawGrid(noSquaresDefault);
@@ -37,8 +34,6 @@ function colorSquare(e) {
   if(mouseDown) {
     e.target.style.backgroundColor = squareEndColour;
   }
-
-  // e.target.style.backgroundColor = squareEndColour;
 }
 
 function clearSquare(square) {
@@ -77,7 +72,7 @@ function redrawGrid(noSquares) {
       square.style.padding = 0;
       square.style.border = squareBorderSize + "px";
       square.style.borderStyle = "solid";
-      square.style.borderColor = "transparent";
+      square.style.borderColor = "lightgrey";
       square.style.backgroundClip = "padding-box";
       
       squares.push(square);
