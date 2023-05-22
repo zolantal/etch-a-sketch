@@ -46,10 +46,8 @@ body.addEventListener("mousedown", () => mouseDown = true);
 body.addEventListener("mouseup", () => mouseDown = false);
 body.addEventListener("dragstart", (e) => e.preventDefault());
 
-function colorSquare(e) {
-  if(mouseDown) {
-    e.target.style.backgroundColor = squareEndColour;
-  }
+function colourSquare(square) {
+  square.style.backgroundColor = squareEndColour;
 }
 
 function clearSquare(square) {
@@ -103,7 +101,11 @@ function redrawGrid(noSquares) {
   }
 
   squares.forEach(square => {
-    square.addEventListener("mouseenter", colorSquare);
+    square.addEventListener("mouseenter", (e) => {
+      if (mouseDown) {
+        colourSquare(e.target);
+      }
+    });
   }, {
     once: true
   });
