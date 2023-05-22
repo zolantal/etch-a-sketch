@@ -43,11 +43,22 @@ body.addEventListener("mousedown", () => mouseDown = true);
 body.addEventListener("mouseup", () => mouseDown = false);
 body.addEventListener("dragstart", (e) => e.preventDefault());
 
-function colourSquare(square) {
+function fillSquare(square) {
   square.style.backgroundColor = squareEndColour;
 }
 
-function clearSquare(square) {
+function shadeSquare(square) {
+
+}
+
+function rgbSquare(square) {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+}
+
+function eraseSquare(square) {
   square.style.backgroundColor = squareStartColour;
 }
 
@@ -97,7 +108,7 @@ function redrawGrid(noSquares) {
 }
 
 function clearGrid(e) {
-  squares.forEach(clearSquare);
+  squares.forEach(eraseSquare);
 }
 
 function toggleGridlines(e) {
@@ -145,7 +156,7 @@ function turnOnFill() {
   squares.forEach(square => {
     square.addEventListener("mouseenter", (e) => {
       if (mouseDown) {
-        colourSquare(e.target);
+        fillSquare(e.target);
       }
     });
   }, {
@@ -154,7 +165,39 @@ function turnOnFill() {
 }
 
 function turnOnErase() {
+  squares.forEach(square => {
+    square.addEventListener("mouseenter", (e) => {
+      if (mouseDown) {
+        eraseSquare(e.target);
+      }
+    });
+  }, {
+    once: true
+  });
+}
 
+function turnOnShade() {
+  squares.forEach(square => {
+    square.addEventListener("mouseenter", (e) => {
+      if (mouseDown) {
+        shadeSquare(e.target);
+      }
+    });
+  }, {
+    once: true
+  });
+}
+
+function turnOnRGB() {
+  squares.forEach(square => {
+    square.addEventListener("mouseenter", (e) => {
+      if (mouseDown) {
+        rgbSquare(e.target);
+      }
+    });
+  }, {
+    once: true
+  });
 }
 
 function toggleMode(e) {
@@ -171,10 +214,10 @@ function toggleMode(e) {
   if (currentMode === "fill") {
     turnOnFill();
   } else if (currentMode === "shade") {
-
+    turnOnShade();
   } else if (currentMode === "rgb") {
-
+    turnOnRGB();
   } else if (currentMode === "erase") {
-
+    turnOnErase();
   }
 }
