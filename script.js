@@ -2,6 +2,7 @@ const grid = document.querySelector("#grid");
 const gridSize = 640;
 
 let noSquaresDefault = 16;
+let noSquares = noSquaresDefault;
 
 const noSquaresRange = document.querySelector("#no-squares-range");
 const noSquaresText = document.querySelector("#no-squares-text");
@@ -18,12 +19,17 @@ let squares;
 const squareBorderSize = 1;
 const squareStartColour = "white";
 const squareEndColour = "black";
+const gridLineColour = "lightgrey";
+let gridlinesOn = true;
 
 redrawGrid(noSquaresDefault);
 
 noSquaresRange.addEventListener("input", noSquaresRangeChange);
 
-
+gridlinesButton.addEventListener("click", (e) => {
+  e.target.classList.toggle("selected-button");
+  toggleGridlines();
+})
 clearButton.addEventListener("click", clearGrid);
 
 let mouseDown = false;
@@ -43,7 +49,7 @@ function clearSquare(square) {
 }
 
 function noSquaresRangeChange(e) {
-  let noSquares = e.target.value;
+  noSquares = e.target.value;
 
   noSquaresText.textContent = noSquares + " × " + noSquares;
   redrawGrid(noSquares);
@@ -72,9 +78,6 @@ function redrawGrid(noSquares) {
       square.style.backgroundColor = squareStartColour;
       square.style.margin = 0;
       square.style.padding = 0;
-      square.style.border = squareBorderSize + "px";
-      square.style.borderStyle = "solid";
-      square.style.borderColor = "lightgrey";
       square.style.backgroundClip = "padding-box";
       
       squares.push(square);
@@ -82,6 +85,12 @@ function redrawGrid(noSquares) {
     }
 
     grid.appendChild(row);
+  }
+
+  if (gridlinesOn) {
+    turnOnGridlines();
+  } else {
+    turnOffGridlines();
   }
 
   squares.forEach(square => {
@@ -93,4 +102,36 @@ function redrawGrid(noSquares) {
 
 function clearGrid(e) {
   squares.forEach(clearSquare);
+}
+
+function toggleGridlines() {
+  if (gridlinesOn) {
+    gridlinesOn = false;
+    turnOffGridlines();
+  } else {
+    gridlinesOn = true;
+    turnOnGridlines();
+  }
+}
+
+function turnOnGridlines() {
+  squares.forEach(square => {
+    // square.style.borderColor = gridLineColour;
+    const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
+    square.style.border = squareBorderSize + "px";
+    square.style.borderStyle = "solid";
+    square.style.borderColor = gridLineColour;
+    square.style.width = squareSize + "px";
+    square.style.height = squareSize + "px";
+  })
+}
+
+function turnOffGridlines() {
+  squares.forEach(square => {
+    // square.style.borderColor = "transparent";
+    const squareSize = Math.floor(gridSize / noSquares);
+    square.style.border = 0;
+    square.style.width = squareSize + "px";
+    square.style.height = squareSize + "px";
+  })
 }

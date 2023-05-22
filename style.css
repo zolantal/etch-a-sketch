@@ -25,7 +25,7 @@ h1 {
   flex-direction: column;
 }
 
-.filled-button {
+.selected-button {
   background-color: grey;
   color: white;
 }
