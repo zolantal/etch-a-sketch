@@ -19,6 +19,7 @@ const clearButton = document.querySelector("#clear");
 const toggleableButtons = document.querySelectorAll(".toggle");
 
 let squares;
+let squareSize;
 const squareBorderSize = 1;
 const squareStartColour = "white";
 const squareEndColour = "black";
@@ -65,8 +66,6 @@ function redrawGrid(noSquares) {
   squares = [];
   grid.replaceChildren();
 
-  const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
-
   for (let i = 0; i < noSquares; i++) {
     const row = document.createElement("div");
 
@@ -80,8 +79,6 @@ function redrawGrid(noSquares) {
       const square = document.createElement("div");
       square.setAttribute("id", i * noSquares + j)
     
-      square.style.width = squareSize + "px";
-      square.style.height = squareSize + "px";
       square.style.backgroundColor = squareStartColour;
       square.style.margin = 0;
       square.style.padding = 0;
@@ -127,8 +124,7 @@ function toggleGridlines() {
 
 function turnOnGridlines() {
   squares.forEach(square => {
-    // square.style.borderColor = gridLineColour;
-    const squareSize = Math.floor(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
+    squareSize = Math.floor(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
     square.style.border = squareBorderSize + "px";
     square.style.borderStyle = "solid";
     square.style.borderColor = gridLineColour;
@@ -139,8 +135,7 @@ function turnOnGridlines() {
 
 function turnOffGridlines() {
   squares.forEach(square => {
-    // square.style.borderColor = "transparent";
-    const squareSize = Math.floor(gridSize / noSquares);
+    squareSize = Math.floor(gridSize / noSquares);
     square.style.border = 0;
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
