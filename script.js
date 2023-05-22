@@ -1,12 +1,12 @@
 const grid = document.querySelector("#grid");
 const gridSize = 640;
 
-let noSquares = 16;
+let noSquaresDefault = 16;
 
 const noSquaresRange = document.querySelector("#no-squares-range");
 const noSquaresText = document.querySelector("#no-squares-text");
-noSquaresRange.value = noSquares;
-noSquaresText.value = noSquares;
+noSquaresRange.value = noSquaresDefault;
+noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
 const clearButton = document.querySelector("#clear");
 
@@ -15,7 +15,7 @@ const squareBorderSize = 1;
 const squareStartColour = "lightgrey";
 const squareEndColour = "black";
 
-redrawGrid(noSquares);
+redrawGrid(noSquaresDefault);
 
 noSquaresRange.addEventListener("input", noSquaresRangeChange);
 
@@ -30,8 +30,10 @@ function clearSquare(square) {
 }
 
 function noSquaresRangeChange(e) {
-  noSquaresText.value = e.target.value;
-  redrawGrid(e.target.value);
+  let noSquares = e.target.value;
+
+  noSquaresText.textContent = noSquares + " × " + noSquares;
+  redrawGrid(noSquares);
 }
 
 function redrawGrid(noSquares) {
