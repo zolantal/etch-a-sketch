@@ -11,11 +11,6 @@ const noSquaresText = document.querySelector("#no-squares-text");
 noSquaresRange.value = noSquaresDefault;
 noSquaresText.textContent = noSquaresDefault + " × " + noSquaresDefault;
 
-// const fillButton = document.querySelector("#fill");
-// const shadingButton = document.querySelector("#shading");
-// const rgbButton = document.querySelector("#rgb");
-// const eraserButton = document.querySelector("#eraser");
-
 const modeButtons = document.querySelectorAll(".mode");
 modeButtons.forEach(button => button.addEventListener("click", toggleMode));
 
@@ -138,7 +133,6 @@ function turnOffGridlines() {
 }
 
 function turnOffAllModes() {
-  // squares.forEach(square => square.replaceWith(square.cloneNode()));
   for (let i = 0; i < squares.length; i++) {
     const old_square = squares[i];
     const new_square = old_square.cloneNode();
@@ -159,6 +153,10 @@ function turnOnFill() {
   });
 }
 
+function turnOnErase() {
+
+}
+
 function toggleMode(e) {
   if (currentMode === e.target.id) {
     return;
@@ -172,11 +170,11 @@ function toggleMode(e) {
 
   if (currentMode === "fill") {
     turnOnFill();
-  } else if (currentMode === "shading") {
+  } else if (currentMode === "shade") {
 
   } else if (currentMode === "rgb") {
 
-  } else if (currentMode === "eraser") {
+  } else if (currentMode === "erase") {
 
   }
 }
