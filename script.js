@@ -124,7 +124,7 @@ function toggleGridlines() {
 
 function turnOnGridlines() {
   squares.forEach(square => {
-    squareSize = Math.floor(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
+    squareSize = Math.round(((gridSize - 2 * squareBorderSize * noSquares) / noSquares));
     square.style.border = squareBorderSize + "px";
     square.style.borderStyle = "solid";
     square.style.borderColor = gridLineColour;
@@ -135,7 +135,7 @@ function turnOnGridlines() {
 
 function turnOffGridlines() {
   squares.forEach(square => {
-    squareSize = Math.floor(gridSize / noSquares);
+    squareSize = Math.round(gridSize / noSquares);
     square.style.border = 0;
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
