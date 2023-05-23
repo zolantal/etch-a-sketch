@@ -137,7 +137,15 @@ function redrawGrid(noSquares) {
     turnOffGridlines();
   }
 
-  turnOnMode(fillSquare);
+  if (currentMode === "fill") {
+    turnOnMode(fillSquare);
+  } else if (currentMode === "shade") {
+    turnOnMode(shadeSquare);
+  } else if (currentMode === "rgb") {
+    turnOnMode(rgbSquare);
+  } else if (currentMode === "erase") {
+    turnOnMode(eraseSquare);
+  };
 }
 
 function clearGrid(e) {
